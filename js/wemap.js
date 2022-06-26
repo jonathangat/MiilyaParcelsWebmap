@@ -2,9 +2,15 @@
 var map = L.map("map").setView([33.032663320260156, 35.22448930268471], 13);
 
 // add tiles
-L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
-  maxZoom: 19,
-  attribution: "© OpenStreetMap | אפיון ופיתוח: יונתן גת",
+// L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+//   maxZoom: 19,
+//   attribution: "© OpenStreetMap | אפיון ופיתוח: יונתן גת",
+// }).addTo(map);
+
+L.tileLayer("http://{s}.google.com/vt/lyrs=s&x={x}&y={y}&z={z}", {
+  maxZoom: 20,
+  subdomains: ["mt0", "mt1", "mt2", "mt3"],
+  attribution: "אפיון ופיתוח: יונתן גת | מפת רקע: גוגל מפות",
 }).addTo(map);
 
 // add locate

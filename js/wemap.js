@@ -6454,11 +6454,14 @@ var map = L.map("map").setView([33.032663320260156, 35.22448930268471], 13);
 //   attribution: "© OpenStreetMap | אפיון ופיתוח: יונתן גת",
 // }).addTo(map);
 
-L.tileLayer("http://{s}.google.com/vt/lyrs=s&x={x}&y={y}&z={z}", {
-  maxZoom: 20,
-  subdomains: ["mt0", "mt1", "mt2", "mt3"],
-  attribution: "אפיון ופיתוח: יונתן גת | מפת רקע: גוגל מפות",
-}).addTo(map);
+L.tileLayer(
+  "https://a.tiles.mapbox.com/v4/mapbox.satellite/{z}/{x}/{y}.jpg?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4M29iazA2Z2gycXA4N2pmbDZmangifQ.-g_vE53SD2WrJ6tFX7QHmA",
+  {
+    maxZoom: 20,
+    subdomains: ["mt0", "mt1", "mt2", "mt3"],
+    attribution: `<span dir='rtl'>ייזום: בלושטיין מפות ועוד | אפיון ופיתוח: יונתן גת | מפת רקע: mapbox</span>`,
+  }
+).addTo(map);
 
 // add locate
 L.control.locate({ strings: { title: "إظهار موقعي" } }).addTo(map);
@@ -6470,9 +6473,9 @@ function highlightFeature(e) {
 
   layer.setStyle({
     weight: 5,
-    color: "#666",
+    color: "yellow",
     dashArray: "",
-    fillOpacity: 0.7,
+    fillOpacity: 0,
   });
 
   if (!L.Browser.ie && !L.Browser.opera && !L.Browser.edge) {

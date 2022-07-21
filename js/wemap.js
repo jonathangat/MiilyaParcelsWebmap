@@ -6526,12 +6526,31 @@ function onEachFeature(feature, layer) {
 
 // wait for DOM to be fully loaded
 document.addEventListener("DOMContentLoaded", async () => {
+  // add logos
+
+  let logos = ["logo_edu_meiilya.png", "pais_logo.png"];
+
+  for (let i = 0; i < logos.length; i++) {
+    L.Control.Watermark = L.Control.extend({
+      onAdd: function (map) {
+        var img = L.DomUtil.create("img");
+
+        img.src = `./img/logos/${logos[i]}`;
+        img.style.width = "100px";
+
+        return img;
+      },
+    });
+
+    L.control.watermark = function (opts) {
+      return new L.Control.Watermark(opts);
+    };
+
+    L.control.watermark({ position: "bottomleft" }).addTo(map);
+  }
+
   // fetch and add to map
   var parcelLayer = L.featureGroup();
-
-  // var fetchParcels = await fetch(
-  //   "https://jonathang.carto.com/api/v2/sql?format=GeoJSON&q=SELECT * FROM miilya_parcels"
-  // ).then((response) => response.json());
 
   var parcelStyle = {};
 

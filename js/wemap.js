@@ -6525,6 +6525,14 @@ function onEachFeature(feature, layer) {
 
   popupContent += `</div>`;
   layer.bindPopup(popupContent);
+
+  // add labels
+  layer
+    .bindTooltip(feature.properties.land_use, {
+      permanent: true,
+      direction: "center",
+    })
+    .openTooltip();
 }
 
 // wait for DOM to be fully loaded

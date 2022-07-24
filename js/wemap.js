@@ -6283,7 +6283,7 @@ function onEachFeature(feature, layer) {
     icon: L.divIcon({
       className: "label",
       html: `${feature.properties.parcel_name}`,
-      iconSize: [100, 40],
+      iconSize: [0, 0],
     }),
   })
     .addTo(map)

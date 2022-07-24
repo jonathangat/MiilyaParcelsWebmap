@@ -6196,7 +6196,7 @@ var data = {
 };
 
 // set up map
-var map = L.map("map").setView([33.032663320260156, 35.22448930268471], 13);
+var map = L.map("map").setView([33.037038396986965, 35.21768913657012], 14);
 
 // add tiles
 L.tileLayer(
@@ -6272,12 +6272,22 @@ function onEachFeature(feature, layer) {
   layer.bindPopup(popupContent);
 
   // add labels
-  layer
-    .bindTooltip(feature.properties.land_use, {
-      permanent: true,
-      direction: "center",
-    })
-    .openTooltip();
+  // layer
+  //   .bindTooltip(feature.properties.parcel_name, {
+  //     permanent: true,
+  //     direction: "center",
+  //   })
+  //   .openTooltip();
+
+  var label = L.marker(layer.getBounds().getCenter(), {
+    icon: L.divIcon({
+      className: "label",
+      html: `${feature.properties.parcel_name}`,
+      iconSize: [100, 40],
+    }),
+  })
+    .addTo(map)
+    .bindPopup(popupContent);
 }
 
 // wait for DOM to be fully loaded

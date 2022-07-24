@@ -20,11 +20,12 @@ body,
 
 .label {
   color: white;
+  direction: rtl;
   font-family: "Vazirmatn", sans-serif;
   text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000,
     1px 1px 0 #000;
   font-size: medium;
-  text-align: center;
+  text-align: right;
   font-weight: bold;
   pointer-events: none;
 }

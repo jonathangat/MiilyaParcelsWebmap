@@ -6318,6 +6318,9 @@ function highlightFeature(e) {
 
 var geojson;
 
+// add collision
+var collisionLayer = L.LayerGroup.collision({ margin: 5 });
+
 function resetHighlight(e) {
   geojson.resetStyle(e.target);
 }
@@ -6360,22 +6363,25 @@ function onEachFeature(feature, layer) {
   layer.bindPopup(popupContent);
 
   // add labels
-  // layer
-  //   .bindTooltip(feature.properties.parcel_name, {
-  //     permanent: true,
-  //     direction: "center",
-  //   })
-  //   .openTooltip();
+  layer
+    .bindTooltip(feature.properties.parcel_name, {
+      direction: "center",
+      className: "TooltipLabel",
+    })
+    .openTooltip();
 
-  var label = L.marker(labeloc[feature.properties.parcel_id], {
-    icon: L.divIcon({
-      className: "label",
-      html: `${feature.properties.parcel_name}`,
-      iconSize: [0, 0],
-    }),
-  })
-    .addTo(map)
-    .bindPopup(popupContent);
+  // add to collision layer
+  collisionLayer.addLayer(layer);
+
+  //   var label = L.marker(labeloc[feature.properties.parcel_id], {
+  //     icon: L.divIcon({
+  //       className: "label",
+  //       html: `${feature.properties.parcel_name}`,
+  //       // iconSize: [0, 0],
+  //     }),
+  //   })
+  //     .addTo(map)
+  //     .bindPopup(popupContent);
 }
 
 // wait for DOM to be fully loaded
@@ -6406,13 +6412,12 @@ document.addEventListener("DOMContentLoaded", async () => {
   // fetch and add to map
   var parcelLayer = L.featureGroup();
 
-  var parcelStyle = {};
-
   geojson = L.geoJson(data, {
-    style: parcelStyle,
     onEachFeature: onEachFeature,
   });
 
-  geojson.addTo(parcelLayer);
-  parcelLayer.addTo(map);
+  collisionLayer.addTo(map);
+
+  // geojson.addTo(parcelLayer);
+  // parcelLayer.addTo(map);
 });

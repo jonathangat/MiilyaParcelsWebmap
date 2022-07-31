@@ -6366,6 +6366,7 @@ function onEachFeature(feature, layer) {
   layer
     .bindTooltip(feature.properties.parcel_name, {
       direction: "center",
+      sticky: true,
       className: "TooltipLabel",
     })
     .openTooltip();

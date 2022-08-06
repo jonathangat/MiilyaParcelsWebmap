@@ -6318,9 +6318,6 @@ function highlightFeature(e) {
 
 var geojson;
 
-// add collision
-var collisionLayer = L.LayerGroup.collision({ margin: 5 });
-
 function resetHighlight(e) {
   geojson.resetStyle(e.target);
 }
@@ -6361,28 +6358,6 @@ function onEachFeature(feature, layer) {
 
   popupContent += `</div>`;
   layer.bindPopup(popupContent);
-
-  // add labels
-  layer
-    .bindTooltip(feature.properties.parcel_name, {
-      direction: "center",
-      sticky: true,
-      className: "TooltipLabel",
-    })
-    .openTooltip();
-
-  // add to collision layer
-  collisionLayer.addLayer(layer);
-
-  //   var label = L.marker(labeloc[feature.properties.parcel_id], {
-  //     icon: L.divIcon({
-  //       className: "label",
-  //       html: `${feature.properties.parcel_name}`,
-  //       // iconSize: [0, 0],
-  //     }),
-  //   })
-  //     .addTo(map)
-  //     .bindPopup(popupContent);
 }
 
 // wait for DOM to be fully loaded
@@ -6413,12 +6388,43 @@ document.addEventListener("DOMContentLoaded", async () => {
   // fetch and add to map
   var parcelLayer = L.featureGroup();
 
+  // create map pane
+  map.createPane("labelsPane");
+
   geojson = L.geoJson(data, {
     onEachFeature: onEachFeature,
   });
 
-  collisionLayer.addTo(map);
+  geojson.addTo(parcelLayer);
+  parcelLayer.addTo(map);
 
-  // geojson.addTo(parcelLayer);
-  // parcelLayer.addTo(map);
+  // add labels
+
+  var i = 0;
+  geojson.eachLayer(function (layer) {
+    var context = {
+      feature: layer.feature,
+      variables: {},
+    };
+    layer.bindTooltip(layer.feature.properties.parcel_name, {
+      permanent: true,
+      direction: "center",
+      className: "TooltipLabel",
+    });
+    labels.push(layer);
+    totalMarkers += 1;
+    layer.added = true;
+    addLabel(layer, i);
+    i++;
+  });
+  resetLabels([geojson]);
+  map.on("zoomend", function () {
+    resetLabels([geojson]);
+  });
+  map.on("layeradd", function () {
+    resetLabels([geojson]);
+  });
+  map.on("layerremove", function () {
+    resetLabels([geojson]);
+  });
 });

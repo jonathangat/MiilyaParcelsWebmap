@@ -6377,7 +6377,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         return img;
       },
     });
-    */
+    
 
     L.control.watermark = function (opts) {
       return new L.Control.Watermark(opts);
@@ -6385,6 +6385,8 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     L.control.watermark({ position: "bottomleft" }).addTo(map);
   }
+  
+  */
 
   // fetch and add to map
   var parcelLayer = L.featureGroup();

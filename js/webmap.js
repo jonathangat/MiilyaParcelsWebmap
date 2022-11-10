@@ -6363,7 +6363,7 @@ function onEachFeature(feature, layer) {
 // wait for DOM to be fully loaded
 document.addEventListener("DOMContentLoaded", async () => {
   // add logos
-
+/*
   let logos = ["logo_edu_meiilya.png", "pais_logo.png"];
 
   for (let i = 0; i < logos.length; i++) {
@@ -6377,6 +6377,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         return img;
       },
     });
+    */
 
     L.control.watermark = function (opts) {
       return new L.Control.Watermark(opts);

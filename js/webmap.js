@@ -6288,11 +6288,11 @@ var map = L.map("map").setView([33.037038396986965, 35.21768913657012], 14);
 
 // add tiles
 L.tileLayer(
-  "https://a.tiles.mapbox.com/v4/mapbox.satellite/{z}/{x}/{y}.jpg?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4M29iazA2Z2gycXA4N2pmbDZmangifQ.-g_vE53SD2WrJ6tFX7QHmA",
+  "https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}",
   {
     maxZoom: 20,
-    subdomains: ["mt0", "mt1", "mt2", "mt3"],
-    attribution: `<span dir='rtl'>ייזום: בלושטיין מפות ועוד | אפיון ופיתוח: יונתן גת | מפת רקע: mapbox</span>`,
+    // subdomains: ["mt0", "mt1", "mt2", "mt3"],
+    attribution: `<span dir='rtl'>ייזום: בלושטיין מפות ועוד | אפיון ופיתוח: יונתן גת | מפת רקע: Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community</span>`,
   }
 ).addTo(map);
 
